@@ -11,3 +11,8 @@
 *.lai
 *.la
 *.a
+
+# Visual Studio build and helper files
+Debug/
+*.sdf
+*.opensdf
