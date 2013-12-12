@@ -47,8 +47,16 @@ int main()
 		wyswietl_plansze(x, y, piesel);	// wyswietl plansze
 		
 		char wynik = sprawdz(piesel);	// policz, czy nie ma zwyciezcy
-		if (wynik){	// sprawdz wygrana
+		if (wynik == 'x'){	// sprawdz wygrana
 			std::cout << "Wygral " << wynik << std::endl;
+			break;
+		}
+		else if (wynik == 'o'){	// sprawdz wygrana
+			std::cout << "Wygralo " << wynik << std::endl;
+			break;
+		}
+		else if (wynik == 3){	// sprawdz wygrana
+			std::cout << "Remis " << wynik << std::endl;
 			break;
 		}
 
@@ -74,6 +82,22 @@ char sprawdz(const typ_piesela & p){
 	// Na lekcji porozmawiamy, czy uprawnione jest zamienienie powyzszego na serie niezaleznych warunkow (if... if... ...).
 	if (p[0][0] == 'x' && p[0][1] == 'x' && p[0][2] == 'x') return'x';
 	else if (p[1][0] == 'x' && p[1][1] == 'x' && p[1][2] == 'x') return'x';
+	else if (p[2][0] == 'x' && p[2][1] == 'x' && p[2][2] == 'x') return 'x';
+	else if (p[0][0] == 'x' && p[1][0] == 'x' && p[2][0] == 'x') return 'x';
+	else if (p[0][1] == 'x' && p[1][1] == 'x' && p[2][1] == 'x') return 'x';
+	else if (p[0][2] == 'x' && p[1][2] == 'x' && p[2][2] == 'x') return 'x';
+	else if (p[0][0] == 'x' && p[1][1] == 'x' && p[2][2] == 'x') return 'x';
+	else if (p[0][2] == 'x' && p[1][1] == 'x' && p[2][0] == 'x') return 'x';
+	else if (p[0][0] == 'o' && p[0][1] == 'o' && p[0][2] == 'o') return 'o';
+	else if (p[1][0] == 'o' && p[1][1] == 'o' && p[1][2] == 'o') return 'o';
+	else if (p[2][0] == 'o' && p[2][1] == 'o' && p[2][2] == 'o') return 'o';
+	else if (p[0][0] == 'o' && p[1][0] == 'o' && p[2][0] == 'o') return 'o';
+	else if (p[0][1] == 'o' && p[1][1] == 'o' && p[2][1] == 'o') return 'o';
+	else if (p[0][2] == 'o' && p[1][2] == 'o' && p[2][2] == 'o') return 'o';
+	else if (p[0][0] == 'o' && p[1][1] == 'o' && p[2][2] == 'o') return 'o';
+	else if (p[0][2] == 'o' && p[1][1] == 'o' && p[2][0] == 'o') return 'o';
+	else if (p[0][0] != ' ' && p[0][1] != ' ' && p[0][2] != ' ' && p[1][0] != ' ' && p[1][1] != ' ' && p[1][2] != ' ' && p[2][0] != ' ' && p[2][1] != ' ' && p[2][2] != ' ') return 3;
+
 	// else { /* co w pozostalych przypadkach */}
 
 	// Podpowiedzi, jak mozna skrocic kod:
