@@ -19,7 +19,7 @@ int main()
 
 
 	piesel_akrobata(ekran, 0, 9, 10, 'x');
-
+	skowron(ekran, 0, 5, 'H');
 	kisiel(ekran);
 
 
