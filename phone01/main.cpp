@@ -2,19 +2,25 @@
 #include <string>
 #include <vector>
 
+struct Osoba {
+	std::string imie;
+	std::string nazwisko;
+	std::string telefon;
+};
+typedef std::vector<Osoba> Adresownik;
 
- 
+
+void add(Adresownik& adresy, Osoba nowy);
+void show(Adresownik& adresy);
+std::string find(Adresownik& adresy, std::string Imie, std::string Nazwisko);
+
 int main(){
 
 	std::string command;
 
-	std::vector <std::string> Imiona;
+	Adresownik adresy;
 
-	std::vector <std::string> Nazwiska;
-
-	std::vector <std::string> Telefony;
-
-
+	
 
 	do
 	{
@@ -24,41 +30,28 @@ int main(){
 
 
 
-		std::cout << "Select one: Add, Show, Quit" << std::endl;
+		std::cout << "Select one: Add, Show, Find, Quit" << std::endl;
 
 		std::cin >> command;
 
 		if (command == "Add"){
-			// add(Imiona, Nazwiska, Telefony);
-
-			std::string Imie, Nazwisko, Telefon;
+			Osoba osobka;
 			std::cout << "Napisz: [Imie] [Nazwisko] [Telefon]" << std::endl;
-			std::cin >> Imie >> Nazwisko >> Telefon;
-			Imiona.push_back(Imie);
-			Nazwiska.push_back(Nazwisko);
-			Telefony.push_back(Telefon);
-	
+			std::cin >> osobka.imie >> osobka.nazwisko >> osobka.telefon;
+			 add(adresy, osobka);	
 		}
 		else if (command == "Show"){
-			// show(Imiona, Nazwiska, Telefony);
-			std::cout << std::endl;
-			for (size_t i = 0; i < Imiona.size(); i++)
-			{
-
-				std::cout << Imiona[i] << " " << Nazwiska[i] << " " << Telefony[i] << std::endl;
-			}
-			
-			std::cout << std::endl;
-
-
-
-
+				show(adresy);	
+		}
+		else if (command == "Find"){
+			std::string Imie, Nazwisko;
+			std::cout << "Napisz: [Imie] [Nazwisko]" << std::endl;
+			std::cin >> Imie >> Nazwisko;
+			std::cout << "Telefon: " << find(adresy, Imie, Nazwisko) << std::endl;
 		}
 		else if (command != "Quit"){
 			std::cout << "Nie ma takiej opcji debilu" << std::endl;
 		}
-
-
 	} while (command != "Quit");
 	
 
@@ -75,14 +68,31 @@ int main(){
 
 
 
+void add(Adresownik& adresy, Osoba o){
+	adresy.push_back(o);
+}
 
 
+void show(Adresownik& adresy){
+	std::cout << std::endl;
+	for (size_t i = 0; i < adresy.size(); i++)
+	{
+		std::cout << adresy[i].imie << " " << adresy[i].nazwisko << " " << adresy[i].telefon << std::endl;
+	}
+	std::cout << std::endl;
+}
 
+std::string find(Adresownik& adresy, std::string Imie, std::string Nazwisko){
 
-
-
-
-
+	std::string res = "Nie znaleziono";
+	for (size_t i = 0; i < adresy.size(); i++){
+		if (Imie == adresy[i].imie && Nazwisko == adresy[i].nazwisko){
+			res = adresy[i].telefon;
+			break;
+		}
+	}
+	return res;
+}
 
 
 
