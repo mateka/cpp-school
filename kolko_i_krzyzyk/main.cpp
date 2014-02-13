@@ -4,6 +4,8 @@
 
 // Okreslenie innej nazwy dla typu planszy (by krocej pisac)
 typedef std::vector<std::vector<char>> typ_piesela;
+const int rozmiar = 20;
+const int dl = 5;
 
 // Deklaracja pomocniczych funkcji (potrzebujemy zadeklarowac ich nazwy przed uzyciem
 // w funkcji main - glownej funkcji programu)
@@ -15,27 +17,32 @@ int main()
 	const char puste = ' ';	// puste pole
 	// przygotuj plansze i ja zainicjuj
 	typ_piesela piesel; //piesel == plansza
-	for (int i = 0; i < 3; ++i) {
-		auto ciastko = std::vector<char>(3, puste);
+	for (int i = 0; i < rozmiar; ++i) {
+		auto ciastko = std::vector<char>(rozmiar, puste);
 		piesel.push_back(ciastko);
 	}
 
 	// Znak gracza
 	char znaczek = 'o';
+	int y = rozmiar + 100;
+	int x = rozmiar + 100;
 	// Maksymalnie 9 ruchow
-	for (int banan = 0; banan < 9; ++banan)// tu byl nadmiarowy srednik! 
+	for (int banan = 0; banan < rozmiar*rozmiar; ++banan)// tu byl nadmiarowy srednik! 
 	{
 		// wczytaj ruch gracza - wspolrzedne
 		// wczytujemy je w nieskonczonosc az:
 		// 1. nie sa poprawne
 		// 2. trafiaja w zajete pole
-		int y = 10;
-		int x = 10;
-		while (true) {
-			std::cout << "Podaj Wspolrzedne" << std::endl;
-			std::cin >> x >> y;
 
-			if (0 <= x && x < 3 && 0 <= y && y < 3) {
+		wyswietl_plansze(x, y, piesel);	// wyswietl plansze
+
+		while (true) {
+			char znx;
+			std::cout << std::endl << "Podaj Wspolrzedne" << std::endl;
+			std::cin >> znx >> y;
+			x = znx - 'a';
+
+			if (0 <= x && x < rozmiar && 0 <= y && y < rozmiar) {
 				if (puste == piesel[x][y]) break;
 			}
 		}
@@ -44,19 +51,22 @@ int main()
 		if ('o' == znaczek)znaczek = 'x';
 		else znaczek = 'o';
 
-		wyswietl_plansze(x, y, piesel);	// wyswietl plansze
+		
 		
 		char wynik = sprawdz(piesel);	// policz, czy nie ma zwyciezcy
-		if (wynik == 'x'){	// sprawdz wygrana
-			std::cout << "Wygral " << wynik << std::endl;
-			break;
-		}
-		else if (wynik == 'o'){	// sprawdz wygrana
-			std::cout << "Wygralo " << wynik << std::endl;
-			break;
-		}
-		else if (wynik == 3){	// sprawdz wygrana
-			std::cout << "Remis " << wynik << std::endl;
+		if (0 < wynik) {
+			wyswietl_plansze(x, y, piesel);	// wyswietl plansze
+
+			if (wynik == 'x'){	// sprawdz wygrana
+				std::cout << std::endl << "Wygral " << wynik << std::endl;
+			}
+			else if (wynik == 'o'){	// sprawdz wygrana
+				std::cout << std::endl << "Wygralo " << wynik << std::endl;
+			}
+			else if (wynik == 5){	// sprawdz wygrana
+				std::cout << "Remis " << wynik << std::endl;
+			}
+
 			break;
 		}
 
@@ -80,7 +90,7 @@ char sprawdz(const typ_piesela & p){
 	// ...
 	// else return 0; // nie ma zadnej linii
 	// Na lekcji porozmawiamy, czy uprawnione jest zamienienie powyzszego na serie niezaleznych warunkow (if... if... ...).
-	if (p[0][0] == 'x' && p[0][1] == 'x' && p[0][2] == 'x') return'x';
+	/*if (p[0][0] == 'x' && p[0][1] == 'x' && p[0][2] == 'x') return'x';
 	else if (p[1][0] == 'x' && p[1][1] == 'x' && p[1][2] == 'x') return'x';
 	else if (p[2][0] == 'x' && p[2][1] == 'x' && p[2][2] == 'x') return 'x';
 	else if (p[0][0] == 'x' && p[1][0] == 'x' && p[2][0] == 'x') return 'x';
@@ -96,8 +106,8 @@ char sprawdz(const typ_piesela & p){
 	else if (p[0][2] == 'o' && p[1][2] == 'o' && p[2][2] == 'o') return 'o';
 	else if (p[0][0] == 'o' && p[1][1] == 'o' && p[2][2] == 'o') return 'o';
 	else if (p[0][2] == 'o' && p[1][1] == 'o' && p[2][0] == 'o') return 'o';
-	else if (p[0][0] != ' ' && p[0][1] != ' ' && p[0][2] != ' ' && p[1][0] != ' ' && p[1][1] != ' ' && p[1][2] != ' ' && p[2][0] != ' ' && p[2][1] != ' ' && p[2][2] != ' ') return 3;
-
+	else if (p[0][0] != ' ' && p[0][1] != ' ' && p[0][2] != ' ' && p[1][0] != ' ' && p[1][1] != ' ' && p[1][2] != ' ' && p[2][0] != ' ' && p[2][1] != ' ' && p[2][2] != ' ') return 5;
+	*/
 	// else { /* co w pozostalych przypadkach */}
 
 	// Podpowiedzi, jak mozna skrocic kod:
@@ -120,23 +130,30 @@ char sprawdz(const typ_piesela & p){
  *  Wyswietlanie planszy
 */
 void wyswietl_plansze(const int x, const int y, const typ_piesela& piesel){
-
-
-	for (int i = 0; i < 3; ++i) {
-
-		for (int j = 0; j < 3; ++j) {
+	std::cout << "  ";
+	for (int i = 0; i < rozmiar; i++) {
+		std::cout << '(';
+		if (i < 10){
+			std::cout << " ";
+		}
+		std::cout << i << ')';
+	}
+	std::cout << std::endl;
+	for (int i = 0; i < rozmiar; ++i) {
+		std::cout << static_cast<char>(i + 'a') << " ";
+		for (int j = 0; j < rozmiar; ++j) {
 
 			if (i == x && j == y){
 
-				std::cout << "("
+				std::cout << "( "
 					<< static_cast<char>(toupper(piesel[i][j]))
 					<< ")";
 
-
+	                                                                                                                                                                                                                         
 
 			}
 			else{
-				std::cout << "("
+				std::cout << "( "
 					<< piesel[i][j]
 					<< ")";
 

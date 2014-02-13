@@ -12,6 +12,7 @@ typedef std::vector<Osoba> Adresownik;
 
 void add(Adresownik& adresy, Osoba nowy);
 void show(Adresownik& adresy);
+void wohs(Adresownik& adresy);
 std::string find(Adresownik& adresy, std::string Imie, std::string Nazwisko);
 
 int main(){
@@ -43,6 +44,9 @@ int main(){
 		else if (command == "Show"){
 				show(adresy);	
 		}
+		else if (command == "Wohs"){
+			wohs(adresy);
+		}
 		else if (command == "Find"){
 			std::string Imie, Nazwisko;
 			std::cout << "Napisz: [Imie] [Nazwisko]" << std::endl;
@@ -72,7 +76,14 @@ void add(Adresownik& adresy, Osoba o){
 	adresy.push_back(o);
 }
 
-
+void wohs(Adresownik& adresy){
+	std::cout << std::endl;
+	for (size_t i = adresy.size(); i > 0; i--)
+	{
+		std::cout << adresy[i-1].imie << " " << adresy[i-1].nazwisko << " " << adresy[i-1].telefon << std::endl;
+	}
+	std::cout << std::endl;
+}
 void show(Adresownik& adresy){
 	std::cout << std::endl;
 	for (size_t i = 0; i < adresy.size(); i++)
