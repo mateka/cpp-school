@@ -6,6 +6,7 @@
 typedef std::vector<std::vector<char>> typ_piesela;
 const int rozmiar = 20;
 const int dl = 5;
+const char puste = ' ';	// puste pole
 
 // Deklaracja pomocniczych funkcji (potrzebujemy zadeklarowac ich nazwy przed uzyciem
 // w funkcji main - glownej funkcji programu)
@@ -14,7 +15,6 @@ void wyswietl_plansze(const int x, const int y, const typ_piesela & piesel);
 
 int main()
 {
-	const char puste = ' ';	// puste pole
 	// przygotuj plansze i ja zainicjuj
 	typ_piesela piesel; //piesel == plansza
 	for (int i = 0; i < rozmiar; ++i) {
