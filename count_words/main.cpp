@@ -6,6 +6,7 @@
 
 typedef std::map<std::string, int> slownik;
 
+
 std::istream& operator>>(std::istream& is, slownik& slowa);
 std::vector<std::string> podziel(std::string slowo);
 
@@ -20,8 +21,42 @@ int main(int argc, char* argv[]) {
 	}
 
 	// cdn
-	for (auto& p : slowole)
-		std::cout << p.first << " : " << p.second << std::endl;
+	//for (auto& p : slowole)
+	//	std::cout << p.first << " : " << p.second << std::endl;
+	
+	std::string command;
+
+	do
+	{
+
+		std::cout << "Select one: Find, Quit" << std::endl;
+
+		std::cin >> command;
+
+		if (command == "Find"){
+			std::string slowo;
+			std::cout << "Napisz: [slowo]" << std::endl;
+			std::cin >> slowo;
+
+			auto it = slowole.find(slowo);
+			if (it != std::end(slowole)) {
+				int ile = it->second;
+				if (ile < 2){
+					std::cout << slowo << " bylo raz" << std::endl;
+				}
+				else
+				{
+					std::cout << slowo << " bylo " << ile << " razy" << std::endl;
+				}
+			}
+			else {
+				std::cout << "Nie bylo takiego wyrazu ;(" << std::endl;
+			}
+		}
+		else if (command != "Quit"){
+			std::cout << "Nie ma takiej opcji debilu" << std::endl;
+		}
+	} while (command != "Quit");
 }
 
 std::istream& operator>>(std::istream& is, slownik& slowa) {
