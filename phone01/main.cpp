@@ -6,6 +6,10 @@
 struct Osoba {
 	std::string imie;
 	std::string nazwisko;
+
+	std::string get_telefon() const { return telefon;  }
+	void set_telefon(std::string t) { /* sprawdzanie*/ telefon = t; }
+private:
 	std::string telefon;
 };
 std::ostream& operator<<(std::ostream& os, const Osoba& o);
@@ -93,11 +97,13 @@ int main(){
 
 
 std::ostream& operator<<(std::ostream& os, const Osoba& o) {
-	os << o.imie << " " << o.nazwisko << " " << o.telefon;
+	os << o.imie << " " << o.nazwisko << " " << o.get_telefon();
 	return os;
 }
 std::istream& operator>>(std::istream& is, Osoba& o){
-	is >> o.imie >> o.nazwisko >> o.telefon;
+	std::string t;
+	is >> o.imie >> o.nazwisko >> t;
+	o.set_telefon(t);
 	return is;
 }
 
@@ -150,7 +156,7 @@ std::string find(Adresownik& adresy, std::string Imie, std::string Nazwisko){
 	std::string res = "Nie znaleziono";
 	for (size_t i = 0; i < adresy.size(); i++){
 		if (Imie == adresy[i].imie && Nazwisko == adresy[i].nazwisko){
-			res = adresy[i].telefon;
+			res = adresy[i].get_telefon();
 			break;
 		}
 	}

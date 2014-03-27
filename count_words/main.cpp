@@ -10,11 +10,17 @@ typedef std::map<std::string, int> slownik;
 std::istream& operator>>(std::istream& is, slownik& slowa);
 std::vector<std::string> podziel(std::string slowo);
 
+std::ostream&operator  << (std::ostream&o, const slownik&s);
+
 int main(int argc, char* argv[]) {
 	slownik slowole;
 	if (2 <= argc) {
 		std::ifstream plik(argv[1]);
 		plik >> slowole;
+		if (3 <= argc){
+			std::ofstream wyplik(argv[2]);
+			wyplik << slowole;
+		}
 	}
 	else {
 		std::cin >> slowole;
@@ -86,3 +92,28 @@ std::vector<std::string> podziel(std::string slowo) {
 	}
 	return result;
 }
+
+std::ostream&operator  << (std::ostream&o, const slownik&s) {
+	for (auto e : s) o << e.first << " " << e.second << std::endl;
+	return o;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
