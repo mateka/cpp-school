@@ -29,6 +29,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "count_words", "count_words\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "wyslowsie", "wyslowsie\wyslowsie.vcxproj", "{620BA662-B996-4B50-AFE6-3FCB439CBBA3}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "staty1", "staty1\staty1.vcxproj", "{0269F226-2959-40C0-87B9-A9FFA7467D95}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -87,6 +89,10 @@ Global
 		{620BA662-B996-4B50-AFE6-3FCB439CBBA3}.Debug|Win32.Build.0 = Debug|Win32
 		{620BA662-B996-4B50-AFE6-3FCB439CBBA3}.Release|Win32.ActiveCfg = Release|Win32
 		{620BA662-B996-4B50-AFE6-3FCB439CBBA3}.Release|Win32.Build.0 = Release|Win32
+		{0269F226-2959-40C0-87B9-A9FFA7467D95}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0269F226-2959-40C0-87B9-A9FFA7467D95}.Debug|Win32.Build.0 = Debug|Win32
+		{0269F226-2959-40C0-87B9-A9FFA7467D95}.Release|Win32.ActiveCfg = Release|Win32
+		{0269F226-2959-40C0-87B9-A9FFA7467D95}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
