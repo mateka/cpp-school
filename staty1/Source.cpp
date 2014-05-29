@@ -25,6 +25,8 @@ int main(){
 
 	float slice = -99999;
 
+	float dice = 0;
+
 	for (int zupa = 0; zupa < ile; ++zupa){
 	
 	
@@ -36,6 +38,16 @@ int main(){
 	
 	
 	}
+
+
+	for (int pupa = 0; pupa < ile; ++pupa){
+
+	dice = dice + liczby[pupa];
+
+	}
+
+	dice = dice / ile;
+
 
 
 	for (int podwieczorek = 0; podwieczorek < ile; ++podwieczorek){
@@ -55,6 +67,6 @@ int main(){
 
 	std::cout << "minimum to " << lump << std::endl;
 	std::cout << "maximum to " << slice << std::endl;
-
+	std::cout << "srednia to " << dice << std::endl;
 
 }
